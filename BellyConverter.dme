@@ -1,0 +1,23 @@
+// DM Environment file for BellyConverter.dme.
+// All manual changes should be made outside the BEGIN_ and END_ blocks.
+// New source code should be placed in .dm files: choose File/New --> Code File.
+
+// BEGIN_INTERNALS
+// END_INTERNALS
+
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+
+// BEGIN_PREFERENCES
+#define DEBUG
+// END_PREFERENCES
+
+// BEGIN_INCLUDE
+#include "belly_dat_vr.dm"
+#include "belly_obj_vr.dm"
+#include "BellyConverter.dm"
+#include "persistence.dm"
+#include "vore_vr.dm"
+// END_INCLUDE
+
