@@ -3,9 +3,10 @@
  */
 
 var/global/player_saves_root = "../../VOREStation/data/player_saves/"
+var/global/debugging = FALSE
 
 /world
-	fps = 25		// 25 frames per second
+	tick_lag = 0.1
 	icon_size = 32	// 32x32 icon size by default
 
 /world/New()
@@ -27,15 +28,20 @@ var/global/player_saves_root = "../../VOREStation/data/player_saves/"
 	for(var/save_dir in player_save_dirs)
 		// export_save_file_txt(save_dir)
 		convert_vore_prefs(save_dir)
-		sleep(-1)
+		sleep(1*world.tick_lag)
 	shutdown()
 
 /proc/convert_vore_prefs(var/save_dir)
-	var/savefile/S = new("[save_dir]/preferences.sav")
+	var/savefile/S = new("[save_dir]preferences.sav")
+	if(!S)
+		world.log << "WARN: [save_dir]preferences.sav does not exist"
+		return
+	if(debugging)	world.log << "Opened [save_dir]preferences.sav"
+
 	for(var/chardir in S.dir)
 		if(copytext(chardir, 1, 10) != "character")
 			continue // Not a save dir
-		S.cd = chardir
+		S.cd = "/[chardir]"
 
 		var/digestable = TRUE
 		var/allowmobvore = TRUE
@@ -50,6 +56,7 @@ var/global/player_saves_root = "../../VOREStation/data/player_saves/"
 		S["vore_taste"] >> vore_taste
 		S["can_be_drop_prey"] >> can_be_drop_prey
 		S["can_be_drop_pred"] >> can_be_drop_pred
+		if(debugging)	world.log << "Now processing [S.name]:[S.cd] - belly_prefs.len = [length(belly_prefs)]"
 
 		// CONVERT BELLY PREFS FROM DATUM TO OBJECTS
 		var/list/belly_objects = list()
@@ -65,7 +72,7 @@ var/global/player_saves_root = "../../VOREStation/data/player_saves/"
 
 		// CREATE vore preferences datum to save
 		var/datum/vore_preferences/VP = new()
-		VP.path = "[save_dir]/vore/[chardir].json"
+		VP.path = "[save_dir]vore/[chardir].json"
 		VP.digestable = digestable
 		VP.allowmobvore = allowmobvore
 		VP.vore_taste = vore_taste
