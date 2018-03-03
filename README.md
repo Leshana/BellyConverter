@@ -4,5 +4,6 @@ This utility converts saved vore belly configuration from the legacy `/datum/bel
 ### Usage
 ```
 $ DreamMaker BellyConverter.dme
-$ DreamDaemon BellyConverter.dmb -trusted -params player_saves_root=path/to/your/data/player_saves
+$ DreamDaemon BellyConverter.dmb -trusted -params player_saves_root=path/to/your/data/player_saves/
 ```
+*Note: The slash on the end of the path is required*
