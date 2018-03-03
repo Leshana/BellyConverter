@@ -85,7 +85,7 @@
 	//// Non-object variables
 	new_belly.name = name
 	new_belly.desc = inside_flavor
-	new_belly.vore_sound = vore_sound
+	//new_belly.vore_sound = vore_sound
 	new_belly.vore_verb = vore_verb
 	new_belly.human_prey_swallow_time = human_prey_swallow_time
 	new_belly.nonhuman_prey_swallow_time = nonhuman_prey_swallow_time

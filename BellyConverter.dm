@@ -6,7 +6,7 @@ var/global/player_saves_root = "../../VOREStation/data/player_saves/"
 var/global/debugging = FALSE
 
 /world
-	tick_lag = 0.1
+	tick_lag = 0.05
 	icon_size = 32	// 32x32 icon size by default
 
 /world/New()
@@ -68,6 +68,7 @@ var/global/debugging = FALSE
 			world.log << "Converting [chardir] belly [belly_name] to /obj/belly"
 			var/obj/belly/new_belly = new(null)
 			BD.copy(new_belly)
+			new_belly.vore_sound = initial(new_belly.vore_sound) // Old vore sounds was a binary, can't really match, so change to default.
 			belly_objects += new_belly
 
 		// CREATE vore preferences datum to save
